@@ -1,0 +1,112 @@
+<header>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo">Reembolso</a>
+        
+        <a href="showSidenav()" materialize="sideNav" [materializeParams]="sidenavParams" [materializeActions]="sidenavActions"
+         data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Sidenav Structure -->
+<ul id="slide-out" class="side-nav">
+  <li><div class="user-view">
+    <a class="reembolso-perfil">Reembolso</a>
+    <a class="nome-perfil name">Felipe Fuerback</a>
+    <a class="email-perfil email">felipe@gmail.com</a>
+  </div></li>
+  <li><a href="#"><i class="material-icons">home</i>Histórico e Solicitações</a></li>
+  <li><a href="#"><i class="material-icons">dashboard</i>Dashboard de Gastos</a></li>
+  <li><a [routerLink]="['/perfil']"><i class="material-icons">person</i>Perfil</a></li>
+  <li><a href="#"><i class="material-icons">exit_to_app</i>Sair</a></li>
+</ul>
+
+<main>
+  <div class="container">
+    <div class="div-user-table col-md-4 offset-md-4">
+      <!--Table-->
+      <table class="table centered highlight">
+        <thead>
+          <tr>
+            <th>Reembolso</th>
+            <th>Status</th>
+            <th>Valor R$</th>
+            <th>Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reembolso of reembolsos">
+            <td>{{reembolso.descricao}}</td>
+            <td><img src="../../assets/{{reembolso.status}}.svg" class="{{reembolso.status}}"></td>
+            <td>{{reembolso.valor}}</td>
+            <td>{{reembolso.categoria.nome}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!--Table-->
+    </div>
+  </div>
+
+  <!-- Float button -->
+  <button (click)="openModal()">
+    <div id="floatbutton">
+      <img src="../../assets/fab.svg" class="fab">
+    </div>
+  </button>
+
+  <!-- Modal Structure -->
+  <div class="modal fade" id="modalReembolso"  materialize="modal" [materializeParams]="modalParams" [materializeActions]="modalActions">
+    <div class="modal-content">
+      <div class="row">
+        <h4 class="col s12">Solicitar Reembolso</h4>
+        <p class="col s12">Preencha as informações abaixo para solicitar reembolso:</p>  
+        <form name="criaReembolsoForm" id="formulario">
+          <div class="input-field col s12">
+            <input id="nome" type="text" ng-model="cadastro.nome" ng-required="true">
+            <label for="nome">Nome do reembolso</label>
+          </div>
+
+          <div class="input-field col s6">
+            <select id="select" ng-options="categoria.nome for categoria in categorias">
+              <option value="" disabled selected>Selecione uma categoria</option>
+            </select>
+            <label for="select">Categoria</label>
+          </div>
+
+          <div class="input-field col s6">
+            <input type="text" class="datepicker" id="data" ng-required="true" >
+            <label for="data">Data</label>
+          </div>
+
+          <div class="input-field col s3">
+            <input id="valor" type="text">
+            <label for="valor">Valor</label>
+          </div>
+
+          <div class="file-field input-field col s12">
+            <div class="btn button-upload">
+              <span>ADICIONAR ARQUIVO</span>
+              <input name="foo" type="file" accept="image/jpeg,image/gif,image/png,application/pdf,image" />
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="row modal-action-buttons">
+        <div class="col l3 offset-l3">
+            <p><button class="solicitar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button></p>
+        </div>
+        <div class="col l3 offset-l3">
+          <p><button id="cadastrar" class="solicitar-button modal-action modal-close">SOLICITAR</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
