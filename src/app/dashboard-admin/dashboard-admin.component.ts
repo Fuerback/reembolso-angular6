@@ -23,12 +23,15 @@ export class DashboardAdminComponent implements OnInit {
 
   reembolsos: any[];
 
+  reembolso: any;
+
   constructor(private reembolsoService: ReembolsosService) {
     this.sidenavActions = new EventEmitter<any>();
     this.sidenavParams = [];
   }
 
-  openModal() {
+  openModal(reembo: any) {
+    this.reembolso = reembo;
     this.modalActions.emit( {action: 'modal', params: ['open']});
   }
 

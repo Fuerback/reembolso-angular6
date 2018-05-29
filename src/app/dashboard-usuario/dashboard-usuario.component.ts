@@ -16,9 +16,10 @@ export class DashboardUsuarioComponent implements OnInit {
 
   public myModel = '';
   public datepicker = '';
+  public nome: string;
 
   public numberMask = createNumberMask({
-    prefix: 'R$ ',
+    prefix: '',
     thousandsSeparatorSymbol: '.',
     decimalSymbol: ',',
     allowLeadingZeroes: true,
@@ -48,8 +49,8 @@ export class DashboardUsuarioComponent implements OnInit {
     this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
-  addReembolso() {
-    this.reembolsoService.setReembolso();
+  addReembolso(form: any) {
+    this.reembolsoService.setReembolso(form);
   }
 
   public showSidenav(): void {

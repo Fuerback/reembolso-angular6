@@ -47,11 +47,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let reembolso of reembolsos" (click)="openModal()">
+          <tr *ngFor="let reembolso of reembolsos" (click)="openModal(reembolso)">
             <td>{{reembolso.descricao}}</td>
             <td><img src="../../assets/{{reembolso.status}}.svg" class="{{reembolso.status}}"></td>
             <td>{{reembolso.valor}}</td>
-            <td>{{reembolso.categoria.nome}}</td>
+            <td>{{reembolso.categoria}}</td>
             <td>{{reembolso.usuario}}</td>
           </tr>
         </tbody>
@@ -64,7 +64,7 @@
   <div class="modal fade" id="modalReembolso"  materialize="modal" [materializeParams]="modalParams" [materializeActions]="modalActions">
     <div class="modal-content">
       <div class="row">
-        <h4 class="col s12">Reembolso - </h4>
+        <h4 class="col s12">Reembolso -</h4>
         <form name="criaReembolsoForm" id="formulario">
           <div class="input-field col s12">
             <input disabled id="nome" type="text" placeholder="" ng-required="true">
@@ -77,8 +77,7 @@
           </div>
 
           <div class="input-field col s6">
-            <!-- <input type="text" [(ngModel)]="datepicker" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"> -->
-            <!-- <label for="data" class="active">Data</label> -->
+            <input type="text" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" />
           </div>
 
           <div class="input-field col s3">

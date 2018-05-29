@@ -42,7 +42,7 @@
             <td>{{reembolso.descricao}}</td>
             <td><img src="../../assets/{{reembolso.status}}.svg" class="{{reembolso.status}}"></td>
             <td>{{reembolso.valor}}</td>
-            <td>{{reembolso.categoria.nome}}</td>
+            <td>{{reembolso.categoria}}</td>
           </tr>
         </tbody>
       </table>
@@ -51,9 +51,7 @@
   </div>
 
   <!-- Float button -->
-  <button (click)="openModal()" class="floatbutton">
-      <img src="../../assets/fab.svg" class="fab">
-  </button>
+  <a class="btn-floating btn-large green floatbutton" (click)="openModal()"><i class="material-icons">add</i></a>
 
   <!-- Modal Structure -->
   <div class="modal fade" id="modalReembolso"  materialize="modal" [materializeParams]="modalParams" [materializeActions]="modalActions">
@@ -61,26 +59,39 @@
       <div class="row">
         <h4 class="col s12">Solicitar Reembolso</h4>
         <p class="col s12">Preencha as informações abaixo para solicitar reembolso:</p>  
-        <form name="criaReembolsoForm" id="formulario">
+
+        {{form.value | json}}
+        {{form.valid}}
+        {{form.value.nome}}
+
+        <form name="criaReembolsoForm" id="formulario" #form="ngForm" novalidate>
           <div class="input-field col s12">
-            <input id="nome" type="text" ng-model="cadastro.nome" ng-required="true">
+            <input id="nome" type="text" name="nome" ngModel required autocomplete="off">
             <label for="nome">Nome do reembolso</label>
           </div>
 
           <div class="input-field col s6">
-            <select materialize="material_select" [materializeSelectOptions]="selectOptions">
+            <select materialize="material_select" [materializeSelectOptions]="selectOptions" name="categoria" required ngModel>
+              <option value="" disabled selected>Selecione uma categoria</option>
               <option *ngFor="let categoria of categorias">{{categoria.nome}}</option>
             </select>
             <label for="select">Categoria</label>
           </div>
 
           <div class="input-field col s6">
-           <input type="text" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" />
+           <input type="text" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" name="data" required ngModel />
+           <label for="data">Data</label>
           </div>
 
-          <div class="input-field col s3">
-            <input [textMask]="{mask: numberMask}" type="text"/>
-          </div>
+          <div class="row">
+              <div class="col s12">
+                R$
+                <div class="input-field inline">
+                  <input [textMask]="{mask: numberMask}" type="text" name="valor" autocomplete="off" required ngModel/>
+                  <label for="valor">Valor</label>
+                </div>
+              </div>
+            </div>
 
           <div class="file-field input-field col s12">
             <div class="btn button-upload">
@@ -97,10 +108,10 @@
     <div class="modal-footer">
       <div class="row modal-action-buttons">
         <div class="col l3 offset-l3">
-            <p><button class="solicitar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button></p>
+            <p><button class="cancelar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button></p>
         </div>
         <div class="col l3 offset-l3">
-          <p><button id="cadastrar" class="solicitar-button modal-action modal-close" (click)="addReembolso()">SOLICITAR</button></p>
+          <p><button id="cadastrar" class="solicitar-button modal-action modal-close" [disabled]="!form.valid" (click)="addReembolso(form)">SOLICITAR</button></p>
         </div>
       </div>
     </div>

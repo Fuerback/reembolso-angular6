@@ -6,10 +6,7 @@ export class ReembolsosService {
       descricao: 'Visita',
       status: 'waiting',
       valor: '312,00',
-      categoria: {
-        id: '4',
-        nome: 'Outros'
-      },
+      categoria: 'Outros',
       usuario: 'Felipe',
       data: '10/10/2008'
     },
@@ -17,10 +14,7 @@ export class ReembolsosService {
       descricao: 'Almoço',
       status: 'approved',
       valor: '215,00',
-      categoria: {
-        id: '2',
-        nome: 'Alimentação'
-      },
+      categoria: 'Alimentação',
       usuario: 'Willian',
       data: '10/10/2008'
     },
@@ -28,10 +22,7 @@ export class ReembolsosService {
       descricao: 'Hotel',
       status: 'canceled',
       valor: '312,00',
-      categoria: {
-        id: '1',
-        nome: 'Hospedagem'
-      },
+      categoria: 'Hospedagem',
       usuario: 'Kauan',
       data: '10/10/2008'
     },
@@ -39,10 +30,7 @@ export class ReembolsosService {
       descricao: 'Uber',
       status: 'canceled',
       valor: '40,00',
-      categoria: {
-        id: '3',
-        nome: 'Transporte'
-      },
+      categoria: 'Transporte',
       usuario: 'Bruno',
       data: '10/10/2008'
     }
@@ -75,17 +63,14 @@ export class ReembolsosService {
     return this.cat;
   }
 
-  setReembolso(): void {
+  setReembolso(form: any): void {
     this.reem.push({
-      descricao: 'Uber 2',
+      descricao: form.value.nome,
       status: 'waiting',
-      valor: '10,00',
-      categoria: {
-        id: '3',
-        nome: 'Transporte'
-      },
+      valor: form.value.valor,
+      categoria: form.value.categoria,
       usuario: 'Felipe F',
-      data: '29/05/2018'
+      data: form.value.data
     });
   }
 }

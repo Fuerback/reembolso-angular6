@@ -88,6 +88,16 @@ main {
   border: none;
   background-color: #f5f5f5;
 }
+.cancelar-button {
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #f5f5f5;
+  color: crimson;
+}
 .solicitar-button:focus {
   background-color: #f5f5f5; 
+}
+.solicitar-button:disabled {
+  color: darkgray;
 }
