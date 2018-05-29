@@ -1,29 +1,17 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { ReembolsosService } from '../service/reembolsos.service';
 
 @Component({
-  selector: 'ca-dashboard-usuario',
-  templateUrl: './dashboard-usuario.component.html',
-  styleUrls: ['./dashboard-usuario.component.css']
+  selector: 'ca-dashboard-admin',
+  templateUrl: './dashboard-admin.component.html',
+  styleUrls: ['./dashboard-admin.component.css']
 })
-export class DashboardUsuarioComponent implements OnInit {
+export class DashboardAdminComponent implements OnInit {
 
   sidenavActions: EventEmitter<any>;
   sidenavParams: any[];
   modalActions = new EventEmitter<string|MaterializeAction>();
-
-  public myModel = '';
-  public datepicker = '';
-
-  public numberMask = createNumberMask({
-    prefix: 'R$ ',
-    thousandsSeparatorSymbol: '.',
-    decimalSymbol: ',',
-    allowLeadingZeroes: true,
-    allowDecimal: true
-  });
 
   modalParams = [
     {
@@ -46,10 +34,6 @@ export class DashboardUsuarioComponent implements OnInit {
 
   closeModal() {
     this.modalActions.emit({action: 'modal', params: ['close']});
-  }
-
-  addReembolso() {
-    this.reembolsoService.setReembolso();
   }
 
   public showSidenav(): void {

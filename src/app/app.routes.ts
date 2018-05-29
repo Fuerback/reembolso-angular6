@@ -6,6 +6,7 @@ import { EmailEnviadoComponent } from './email-enviado/email-enviado.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardUsuarioComponent } from './dashboard-usuario/dashboard-usuario.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -14,5 +15,6 @@ export const ROUTES: Routes = [
   {path: 'emailEnviado', component: EmailEnviadoComponent},
   {path: 'redefinirSenha', component: RedefinirSenhaComponent},
   {path: 'perfil', component: PerfilComponent},
-  {path: 'dashboardUsuario', component: DashboardUsuarioComponent}
+  {path: 'dashboardUsuario', component: DashboardUsuarioComponent},
+  {path: 'dashboardAdmin', component: DashboardAdminComponent}
 ];

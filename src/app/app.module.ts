@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import {ROUTES} from './app.routes';
 
@@ -15,6 +17,8 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.compo
 import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardUsuarioComponent } from './dashboard-usuario/dashboard-usuario.component';
 import { NavigatorComponent } from './navigator/navigator.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { ReembolsosService } from './service/reembolsos.service';
 
 @NgModule({
   declarations: [
@@ -26,15 +30,18 @@ import { NavigatorComponent } from './navigator/navigator.component';
     RedefinirSenhaComponent,
     PerfilComponent,
     DashboardUsuarioComponent,
-    NavigatorComponent
+    NavigatorComponent,
+    DashboardAdminComponent
   ],
   imports: [
     BrowserModule,
     MaterializeModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule,
+    TextMaskModule
   ],
-  providers: [],
+  providers: [ReembolsosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

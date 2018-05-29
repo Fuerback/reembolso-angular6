@@ -60,10 +60,12 @@ main {
   height: 24px;
   object-fit: contain;
 }
-#floatbutton {
+.floatbutton {
   position: fixed;
   right: 3%;
   bottom: 4%;
+  border: none;
+  background-color: #f5f5f5;
 }
 .modal-action-buttons {
   width: 90%;

@@ -2,10 +2,17 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a class="brand-logo">Reembolso</a>
-        
+        <a class="brand-logo">Reembolso</a>        
         <a href="showSidenav()" materialize="sideNav" [materializeParams]="sidenavParams" [materializeActions]="sidenavActions"
          data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+         <ul class="right hide-on-med-and-down">
+          <li>
+            <button class="btn copiar-button" type="submit" id="codigoEmpresa">
+              <img src="../../assets/group-7.svg" class="copy-button">
+              Cod: 1010
+            </button>
+          </li>
+        </ul>
       </div>
     </nav>
   </div>
@@ -21,12 +28,13 @@
   <li><a href="#"><i class="material-icons">home</i>Histórico e Solicitações</a></li>
   <li><a href="#"><i class="material-icons">dashboard</i>Dashboard de Gastos</a></li>
   <li><a [routerLink]="['/perfil']"><i class="material-icons">person</i>Perfil</a></li>
-  <li><a href="#"><i class="material-icons">exit_to_app</i>Sair</a></li>
+  <li><a [routerLink]="['/login']"><i class="material-icons">exit_to_app</i>Sair</a></li>
 </ul>
 
 <main>
   <div class="container">
-    <div class="div-user-table col-md-4 offset-md-4">
+
+    <div class="div-admin-table">
       <!--Table-->
       <table class="table centered highlight">
         <thead>
@@ -35,14 +43,16 @@
             <th>Status</th>
             <th>Valor R$</th>
             <th>Categoria</th>
+            <th>Usuário</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let reembolso of reembolsos">
+          <tr *ngFor="let reembolso of reembolsos" (click)="openModal()">
             <td>{{reembolso.descricao}}</td>
             <td><img src="../../assets/{{reembolso.status}}.svg" class="{{reembolso.status}}"></td>
             <td>{{reembolso.valor}}</td>
             <td>{{reembolso.categoria.nome}}</td>
+            <td>{{reembolso.usuario}}</td>
           </tr>
         </tbody>
       </table>
@@ -50,41 +60,35 @@
     </div>
   </div>
 
-  <!-- Float button -->
-  <button (click)="openModal()" class="floatbutton">
-      <img src="../../assets/fab.svg" class="fab">
-  </button>
-
   <!-- Modal Structure -->
   <div class="modal fade" id="modalReembolso"  materialize="modal" [materializeParams]="modalParams" [materializeActions]="modalActions">
     <div class="modal-content">
       <div class="row">
-        <h4 class="col s12">Solicitar Reembolso</h4>
-        <p class="col s12">Preencha as informações abaixo para solicitar reembolso:</p>  
+        <h4 class="col s12">Reembolso - </h4>
         <form name="criaReembolsoForm" id="formulario">
           <div class="input-field col s12">
-            <input id="nome" type="text" ng-model="cadastro.nome" ng-required="true">
-            <label for="nome">Nome do reembolso</label>
+            <input disabled id="nome" type="text" placeholder="" ng-required="true">
+            <label class="active" for="nome">Nome do reembolso</label>
           </div>
 
           <div class="input-field col s6">
-            <select materialize="material_select" [materializeSelectOptions]="selectOptions">
-              <option *ngFor="let categoria of categorias">{{categoria.nome}}</option>
-            </select>
-            <label for="select">Categoria</label>
+            <input disabled id="categoria" type="text" placeholder="" ng-required="true">
+            <label class="active" for="categoria">Categoria</label>
           </div>
 
           <div class="input-field col s6">
-           <input type="text" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" />
+            <!-- <input type="text" [(ngModel)]="datepicker" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]"> -->
+            <!-- <label for="data" class="active">Data</label> -->
           </div>
 
           <div class="input-field col s3">
-            <input [textMask]="{mask: numberMask}" type="text"/>
+            <input disabled id="valor" placeholder="" ng-model="reembolsoAtual.valor" type="text">
+            <label for="valor">Valor</label>
           </div>
 
           <div class="file-field input-field col s12">
             <div class="btn button-upload">
-              <span>ADICIONAR ARQUIVO</span>
+              <span><i class="material-icons copy-button">cloud_download</i>DOWNLOAD</span>
               <input name="foo" type="file" accept="image/jpeg,image/gif,image/png,application/pdf,image" />
             </div>
             <div class="file-path-wrapper">
@@ -96,11 +100,14 @@
     </div>
     <div class="modal-footer">
       <div class="row modal-action-buttons">
-        <div class="col l3 offset-l3">
-            <p><button class="solicitar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button></p>
+        <div class="col s3">
+            <button class="btn aprovar-button modal-action modal-close" ng-click="setStatusReembolso(reembolsoAtual, 'approved')" ng-disabled="criaReembolsoForm.$invalid">APROVAR</button>
+        </div>
+        <div class="col s3">
+            <button class="btn recusar-button modal-action modal-close" ng-click="setStatusReembolso(reembolsoAtual, 'canceled')">RECUSAR</button>
         </div>
         <div class="col l3 offset-l3">
-          <p><button id="cadastrar" class="solicitar-button modal-action modal-close" (click)="addReembolso()">SOLICITAR</button></p>
+            <button class="btn cancelar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button>
         </div>
       </div>
     </div>
