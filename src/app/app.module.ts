@@ -20,8 +20,10 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { DashboardUsuarioComponent } from './dashboard-usuario/dashboard-usuario.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
-import { ReembolsosService } from './service/reembolsos.service';
 import { GastosComponent } from './gastos/gastos.component';
+
+import { ReembolsosService } from './service/reembolsos.service';
+import { LoginService } from './service/login.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { GastosComponent } from './gastos/gastos.component';
     TextMaskModule,
     ClipboardModule
   ],
-  providers: [ReembolsosService],
+  providers: [ReembolsosService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
