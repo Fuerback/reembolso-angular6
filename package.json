@@ -27,6 +27,7 @@
     "jquery": "^2.2.4",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.100.2",
+    "ngx-clipboard": "^11.1.0",
     "rxjs": "^6.0.0",
     "text-mask-addons": "^3.7.2",
     "zone.js": "^0.8.26"

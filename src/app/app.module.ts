@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import {ROUTES} from './app.routes';
 
@@ -39,7 +40,8 @@ import { ReembolsosService } from './service/reembolsos.service';
     HttpModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
-    TextMaskModule
+    TextMaskModule,
+    ClipboardModule
   ],
   providers: [ReembolsosService],
   bootstrap: [AppComponent]

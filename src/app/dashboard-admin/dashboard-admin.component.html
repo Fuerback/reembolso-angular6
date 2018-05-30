@@ -7,7 +7,7 @@
          data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
          <ul class="right hide-on-med-and-down">
           <li>
-            <button class="btn copiar-button" type="submit" id="codigoEmpresa">
+            <button class="btn copiar-button" type="submit" id="codigoEmpresa" (click)="copiaCodigoEmpresa()" ngxClipboard [cbContent]="1010">
               <img src="../../assets/group-7.svg" class="copy-button">
               Cod: 1010
             </button>
@@ -64,24 +64,25 @@
   <div class="modal fade" id="modalReembolso"  materialize="modal" [materializeParams]="modalParams" [materializeActions]="modalActions">
     <div class="modal-content">
       <div class="row">
-        <h4 class="col s12">Reembolso -</h4>
+        <h4 class="col s12">Reembolso - {{usuario}}</h4>
         <form name="criaReembolsoForm" id="formulario">
           <div class="input-field col s12">
-            <input disabled id="nome" type="text" placeholder="" ng-required="true">
+            <input disabled id="nome" type="text" placeholder="" value="{{descricao}}">
             <label class="active" for="nome">Nome do reembolso</label>
           </div>
 
           <div class="input-field col s6">
-            <input disabled id="categoria" type="text" placeholder="" ng-required="true">
+            <input disabled id="categoria" type="text" placeholder="" value="{{categoria}}">
             <label class="active" for="categoria">Categoria</label>
           </div>
 
           <div class="input-field col s6">
-            <input type="text" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" />
+            <input disabled type="text" placeholder="" materialize="pickadate" [materializeParams]="[{format:'dd/mm/yyyy'}]" value="{{data}}" />
+            <label for="data">Data</label>
           </div>
 
           <div class="input-field col s3">
-            <input disabled id="valor" placeholder="" ng-model="reembolsoAtual.valor" type="text">
+            <input disabled id="valor" placeholder="" type="text" value="{{valor}}">
             <label for="valor">Valor</label>
           </div>
 
@@ -100,10 +101,10 @@
     <div class="modal-footer">
       <div class="row modal-action-buttons">
         <div class="col s3">
-            <button class="btn aprovar-button modal-action modal-close" ng-click="setStatusReembolso(reembolsoAtual, 'approved')" ng-disabled="criaReembolsoForm.$invalid">APROVAR</button>
+            <button class="btn aprovar-button modal-action modal-close" (click)="setStatusReembolso('approved')">APROVAR</button>
         </div>
         <div class="col s3">
-            <button class="btn recusar-button modal-action modal-close" ng-click="setStatusReembolso(reembolsoAtual, 'canceled')">RECUSAR</button>
+            <button class="btn recusar-button modal-action modal-close" (click)="setStatusReembolso('canceled')">RECUSAR</button>
         </div>
         <div class="col l3 offset-l3">
             <button class="btn cancelar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button>

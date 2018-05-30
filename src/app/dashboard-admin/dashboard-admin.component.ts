@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { ReembolsosService } from '../service/reembolsos.service';
+import { toast } from 'angular2-materialize';
 
 @Component({
   selector: 'ca-dashboard-admin',
@@ -23,7 +24,12 @@ export class DashboardAdminComponent implements OnInit {
 
   reembolsos: any[];
 
-  reembolso: any;
+  usuario: string;
+  valor: string;
+  data: string;
+  descricao: string;
+  categoria: string;
+  reembolsoSelecionado: any;
 
   constructor(private reembolsoService: ReembolsosService) {
     this.sidenavActions = new EventEmitter<any>();
@@ -31,12 +37,25 @@ export class DashboardAdminComponent implements OnInit {
   }
 
   openModal(reembo: any) {
-    this.reembolso = reembo;
+    this.reembolsoSelecionado = reembo;
+    this.usuario = reembo.usuario;
+    this.valor = reembo.valor;
+    this.data = reembo.data;
+    this.descricao = reembo.descricao;
+    this.categoria = reembo.categoria;
     this.modalActions.emit( {action: 'modal', params: ['open']});
   }
 
   closeModal() {
     this.modalActions.emit({action: 'modal', params: ['close']});
+  }
+
+  setStatusReembolso(status: string) {
+    this.reembolsoSelecionado.status = status;
+  }
+
+  copiaCodigoEmpresa() {
+    toast('Código copiado!', 2000, 'rounded');
   }
 
   public showSidenav(): void {
