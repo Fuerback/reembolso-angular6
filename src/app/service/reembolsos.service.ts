@@ -1,3 +1,7 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+@Injectable()
 export class ReembolsosService {
   constructor() {}
 
@@ -55,12 +59,39 @@ export class ReembolsosService {
     }
   ];
 
+  gastosTot: any[] = [
+    {
+      valor: '312,00',
+      email: 'fuerback@gmail.com',
+      usuario: 'Felipe'
+    },
+    {
+      valor: '215,00',
+      email: 'willian@gmail.com',
+      usuario: 'Willian'
+    },
+    {
+      valor: '315,00',
+      email: 'kauan@gmail.com',
+      usuario: 'Kauan'
+    },
+    {
+      valor: '415,00',
+      email: 'bruno@gmail.com',
+      usuario: 'Bruno'
+    }
+  ];
+
   reembolsos(): any[] {
     return this.reem;
   }
 
   categorias(): any[] {
     return this.cat;
+  }
+
+  gastosTotal(): any[] {
+    return this.gastosTot;
   }
 
   setReembolso(form: any): void {

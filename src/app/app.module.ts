@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -20,6 +21,7 @@ import { DashboardUsuarioComponent } from './dashboard-usuario/dashboard-usuario
 import { NavigatorComponent } from './navigator/navigator.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { ReembolsosService } from './service/reembolsos.service';
+import { GastosComponent } from './gastos/gastos.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,14 @@ import { ReembolsosService } from './service/reembolsos.service';
     PerfilComponent,
     DashboardUsuarioComponent,
     NavigatorComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    GastosComponent
   ],
   imports: [
     BrowserModule,
     MaterializeModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
     TextMaskModule,
