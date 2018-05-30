@@ -14,7 +14,6 @@ export class DashboardUsuarioComponent implements OnInit {
   sidenavParams: any[];
   modalActions = new EventEmitter<string|MaterializeAction>();
 
-  public myModel = '';
   public datepicker = '';
   public nome: string;
 
@@ -45,12 +44,18 @@ export class DashboardUsuarioComponent implements OnInit {
     this.modalActions.emit( {action: 'modal', params: ['open']});
   }
 
-  closeModal() {
+  closeModal(form: any) {
     this.modalActions.emit({action: 'modal', params: ['close']});
+    this.limparModal(form);
   }
 
   addReembolso(form: any) {
     this.reembolsoService.setReembolso(form);
+    this.limparModal(form);
+  }
+
+  limparModal(form: any) {
+    form.reset();
   }
 
   public showSidenav(): void {

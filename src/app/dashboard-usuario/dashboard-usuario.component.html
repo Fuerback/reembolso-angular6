@@ -38,7 +38,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let reembolso of reembolsos">
+          <tr *ngFor="let reembolso of reembolsos" (click)="openModal()">
             <td>{{reembolso.descricao}}</td>
             <td><img src="../../assets/{{reembolso.status}}.svg" class="{{reembolso.status}}"></td>
             <td>{{reembolso.valor}}</td>
@@ -108,7 +108,7 @@
     <div class="modal-footer">
       <div class="row modal-action-buttons">
         <div class="col l3 offset-l3">
-            <p><button class="cancelar-button modal-action modal-close" (click)="closeModal()">CANCELAR</button></p>
+            <p><button class="cancelar-button modal-action modal-close" (click)="closeModal(form)">CANCELAR</button></p>
         </div>
         <div class="col l3 offset-l3">
           <p><button id="cadastrar" class="solicitar-button modal-action modal-close" [disabled]="!form.valid" (click)="addReembolso(form)">SOLICITAR</button></p>
