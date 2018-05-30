@@ -14,7 +14,9 @@ export class PerfilComponent implements OnInit {
 
   constructor() {
     this.sidenavActions = new EventEmitter<any>();
-    this.sidenavParams = [];
+    this.sidenavParams = [{
+      closeOnClick: true
+    }];
   }
 
   public showSidenav(): void {

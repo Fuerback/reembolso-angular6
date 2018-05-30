@@ -17,7 +17,9 @@ export class GastosComponent implements OnInit {
 
   constructor(private reembolsoService: ReembolsosService) {
     this.sidenavActions = new EventEmitter<any>();
-    this.sidenavParams = [];
+    this.sidenavParams = [{
+        closeOnClick: true
+    }];
   }
 
   public showSidenav(): void {

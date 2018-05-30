@@ -37,7 +37,9 @@ export class DashboardUsuarioComponent implements OnInit {
 
   constructor(private reembolsoService: ReembolsosService) {
     this.sidenavActions = new EventEmitter<any>();
-    this.sidenavParams = [];
+    this.sidenavParams = [{
+      closeOnClick: true
+    }];
   }
 
   openModal() {
